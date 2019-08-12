@@ -1,40 +1,28 @@
-import React from 'react';
-import { Modal, ModalHeader, ModalBody, FormGroup, Label, NavbarBrand } from 'reactstrap';
+import React from "react";
+import {
+  Modal,
+  ModalHeader,
+  ModalBody,
+  FormGroup,
+  Label,
+  NavbarBrand
+} from "reactstrap";
 
-const photos = [
-  { src: '/images/vict-baby.png' },
-  { src: '/images/ned.jpeg' },
-  { src: '/images/devilgirl.jpg' },
-  { src: '/images/trump.jpg' },
-  { src: '/images/one-does-not.jpg' },
-  { src: '/images/dank.png' },
-  { src: '/images/boy.png' },
-  { src: '/images/sad.png' },
-  { src: '/images/wolf.png' },
-  { src: '/images/fry.jpg' },
-  { src: '/images/jobs.jpg' },
-  { src: '/images/phone.jpg' },
-  { src: '/images/oldie.png' },
-  { src: '/images/image.png' },
-  { src: '/images/doubt.png' },
-  { src: '/images/crying.png' },
-  { src: '/images/sponge.png' },
-  { src: '/images/dog.png' },
-  { src: '/images/frust.png' },
-  { src: '/images/web.png' },
-  { src: '/images/penguin.png' }
-];
+const photos = [{ src: "/images/badge.jpg" }];
 
 const initialState = {
   toptext: "",
   bottomtext: "",
+  lefttext: "",
   isTopDragging: false,
   isBottomDragging: false,
-  topY: "10%",
-  topX: "50%",
+  topY: "84%",
+  topX: "80%",
+  leftY: "84%",
+  leftX: "25%",
   bottomX: "50%",
-  bottomY: "90%"
-}
+  bottomY: "96%"
+};
 
 class MainPage extends React.Component {
   constructor() {
@@ -47,7 +35,7 @@ class MainPage extends React.Component {
     };
   }
 
-  openImage = (index) => {
+  openImage = index => {
     const image = photos[index];
     const base_image = new Image();
     base_image.src = image.src;
@@ -58,19 +46,19 @@ class MainPage extends React.Component {
       currentImagebase64: base64,
       ...initialState
     }));
-  }
+  };
 
   toggle = () => {
     this.setState(prevState => ({
       modalIsOpen: !prevState.modalIsOpen
     }));
-  }
+  };
 
-  changeText = (event) => {
+  changeText = event => {
     this.setState({
       [event.currentTarget.name]: event.currentTarget.value
     });
-  }
+  };
 
   getStateObj = (e, type) => {
     let rect = this.imageRef.getBoundingClientRect();
@@ -83,32 +71,34 @@ class MainPage extends React.Component {
         isTopDragging: false,
         bottomX: `${xOffset}px`,
         bottomY: `${yOffset}px`
-      }
+      };
     } else if (type === "top") {
       stateObj = {
         isTopDragging: true,
         isBottomDragging: false,
         topX: `${xOffset}px`,
         topY: `${yOffset}px`
-      }
+      };
     }
     return stateObj;
-  }
+  };
 
   handleMouseDown = (e, type) => {
     const stateObj = this.getStateObj(e, type);
-    document.addEventListener('mousemove', (event) => this.handleMouseMove(event, type));
+    document.addEventListener("mousemove", event =>
+      this.handleMouseMove(event, type)
+    );
     this.setState({
       ...stateObj
-    })
-  }
+    });
+  };
 
   handleMouseMove = (e, type) => {
     if (this.state.isTopDragging || this.state.isBottomDragging) {
       let stateObj = {};
       if (type === "bottom" && this.state.isBottomDragging) {
         stateObj = this.getStateObj(e, type);
-      } else if (type === "top" && this.state.isTopDragging){
+      } else if (type === "top" && this.state.isTopDragging) {
         stateObj = this.getStateObj(e, type);
       }
       this.setState({
@@ -117,13 +107,13 @@ class MainPage extends React.Component {
     }
   };
 
-  handleMouseUp = (event) => {
-    document.removeEventListener('mousemove', this.handleMouseMove);
+  handleMouseUp = event => {
+    document.removeEventListener("mousemove", this.handleMouseMove);
     this.setState({
       isTopDragging: false,
       isBottomDragging: false
     });
-  }
+  };
 
   convertSvgToImage = () => {
     const svg = this.svgRef;
@@ -134,17 +124,20 @@ class MainPage extends React.Component {
     canvas.width = svgSize.width;
     canvas.height = svgSize.height;
     const img = document.createElement("img");
-    img.setAttribute("src", "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData))));
+    img.setAttribute(
+      "src",
+      "data:image/svg+xml;base64," + btoa(unescape(encodeURIComponent(svgData)))
+    );
     img.onload = function() {
       canvas.getContext("2d").drawImage(img, 0, 0);
       const canvasdata = canvas.toDataURL("image/png");
       const a = document.createElement("a");
-      a.download = "meme.png";
+      a.download = "badge.png";
       a.href = canvasdata;
       document.body.appendChild(a);
       a.click();
     };
-  }
+  };
 
   getBase64Image(img) {
     var canvas = document.createElement("canvas");
@@ -163,31 +156,43 @@ class MainPage extends React.Component {
     var wrh = base_image.width / base_image.height;
     var newWidth = 600;
     var newHeight = newWidth / wrh;
-    const textStyle = {
-      fontFamily: "Impact",
-      fontSize: "50px",
-      textTransform: "uppercase",
+    const textStyleLeft = {
+      fontFamily: "Roboto",
+      fontSize: "40px",
+      // textTransform: "uppercase",
       fill: "#FFF",
-      stroke: "#000",
+      fontWeight: 600,
+
+      // stroke: "#000",
       userSelect: "none"
-    }
+    };
+    const textStyleTop = {
+      fontFamily: "Roboto",
+      fontSize: "70px",
+      // textTransform: "uppercase",
+      fill: "#FFF",
+      fontWeight: 600,
+
+      // stroke: "#000",
+      userSelect: "none"
+    };
+
+    const textStyleBottom = {
+      fontFamily: "Roboto",
+      fontSize: "50px",
+      fontWeight: 700,
+      // textTransform: "uppercase",
+      fill: "#23608c",
+      // stroke: "#000",
+      userSelect: "none"
+    };
 
     return (
       <div>
         <div className="main-content">
-          <div className="sidebar">
-            <NavbarBrand href="/">Make-a-Meme</NavbarBrand>
-            <p>
-              This is a fun 5 hour project inspired by imgur. Built with React.
-            </p>
-            <p>
-              You can add top and bottom text to a meme-template, move the text around and can save the image by downloading it.
-            </p>
-          </div>
           <div className="content">
             {photos.map((image, index) => (
               <div className="image-holder" key={image.src}>
-                <span className="meme-top-caption">Top text</span>
                 <img
                   style={{
                     width: "100%",
@@ -199,65 +204,111 @@ class MainPage extends React.Component {
                   onClick={() => this.openImage(index)}
                   role="presentation"
                 />
-              <span className="meme-bottom-caption">Bottom text</span>
               </div>
             ))}
           </div>
         </div>
         <Modal className="meme-gen-modal" isOpen={this.state.modalIsOpen}>
-          <ModalHeader toggle={this.toggle}>Make-a-Meme</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Orcha Badge Maker</ModalHeader>
           <ModalBody>
             <svg
               width={newWidth}
               id="svg_ref"
               height={newHeight}
-              ref={el => { this.svgRef = el }}
+              ref={el => {
+                this.svgRef = el;
+              }}
               xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink">
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+            >
               <image
-                ref={el => { this.imageRef = el }}
+                ref={el => {
+                  this.imageRef = el;
+                }}
                 xlinkHref={this.state.currentImagebase64}
                 height={newHeight}
                 width={newWidth}
               />
               <text
-                style={{ ...textStyle, zIndex: this.state.isTopDragging ? 4 : 1 }}
+                style={{
+                  ...textStyleLeft,
+                  zIndex: this.state.isTopDragging ? 4 : 1
+                }}
+                x={this.state.leftX}
+                y={this.state.leftY}
+                dominantBaseline="middle"
+                textAnchor="middle"
+              >
+                {this.state.lefttext}
+              </text>
+
+              <text
+                style={{
+                  ...textStyleTop,
+                  zIndex: this.state.isTopDragging ? 4 : 1
+                }}
                 x={this.state.topX}
                 y={this.state.topY}
                 dominantBaseline="middle"
                 textAnchor="middle"
-                onMouseDown={event => this.handleMouseDown(event, 'top')}
-                onMouseUp={event => this.handleMouseUp(event, 'top')}
               >
-                  {this.state.toptext}
+                {this.state.toptext}
               </text>
               <text
-                style={textStyle}
+                style={textStyleBottom}
                 dominantBaseline="middle"
                 textAnchor="middle"
                 x={this.state.bottomX}
                 y={this.state.bottomY}
-                onMouseDown={event => this.handleMouseDown(event, 'bottom')}
-                onMouseUp={event => this.handleMouseUp(event, 'bottom')}
               >
-                  {this.state.bottomtext}
+                {this.state.bottomtext}
               </text>
             </svg>
             <div className="meme-form">
               <FormGroup>
-                <Label for="toptext">Top Text</Label>
-                <input className="form-control" type="text" name="toptext" id="toptext" placeholder="Add text to the top" onChange={this.changeText} />
+                <Label for="toptext">Review Score</Label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="toptext"
+                  id="toptext"
+                  placeholder="79%"
+                  onChange={this.changeText}
+                />
               </FormGroup>
               <FormGroup>
-                <Label for="bottomtext">Bottom Text</Label>
-                <input className="form-control" type="text" name="bottomtext" id="bottomtext" placeholder="Add text to the bottom" onChange={this.changeText} />
+                <Label for="lefttext">Review Year</Label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="lefttext"
+                  id="lefttext"
+                  placeholder="2019 RATING"
+                  onChange={this.changeText}
+                />
               </FormGroup>
-              <button onClick={() => this.convertSvgToImage()} className="btn btn-primary">Download Meme!</button>
+              <FormGroup>
+                <Label for="bottomtext">App Version</Label>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="bottomtext"
+                  id="bottomtext"
+                  placeholder="IOS Version 1.0"
+                  onChange={this.changeText}
+                />
+              </FormGroup>
+              <button
+                onClick={() => this.convertSvgToImage()}
+                className="btn btn-primary"
+              >
+                Download
+              </button>
             </div>
           </ModalBody>
         </Modal>
       </div>
-    )
+    );
   }
 }
 
