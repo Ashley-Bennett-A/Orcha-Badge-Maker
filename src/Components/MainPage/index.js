@@ -11,7 +11,7 @@ import {
 import badge from "./badge.jpg";
 import badge2 from "./badge2.jpg";
 
-const photos = [{ src: badge, src: badge2 }];
+const photos = [{ src: badge }, { src: badge2 }];
 
 const initialState = {
   toptext: "",
