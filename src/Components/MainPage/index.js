@@ -8,7 +8,9 @@ import {
   NavbarBrand
 } from "reactstrap";
 
-const photos = [{ src: "/images/badge.jpg" }];
+import badge from "./badge.jpg";
+
+const photos = [{ src: badge }];
 
 const initialState = {
   toptext: "",
