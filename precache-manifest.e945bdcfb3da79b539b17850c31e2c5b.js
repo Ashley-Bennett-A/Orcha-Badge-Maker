@@ -16,15 +16,15 @@ self.__precacheManifest = [
     "url": "/Orcha-Badge-Maker/static/js/runtime~main.fb6bed09.js"
   },
   {
-    "revision": "e4c1c634ec609a8fcd9a",
-    "url": "/Orcha-Badge-Maker/static/js/main.e4c1c634.chunk.js"
+    "revision": "968001f94c6d438006ca",
+    "url": "/Orcha-Badge-Maker/static/js/main.968001f9.chunk.js"
   },
   {
     "revision": "bc64ca944667338ca425",
     "url": "/Orcha-Badge-Maker/static/js/1.bc64ca94.chunk.js"
   },
   {
-    "revision": "e4c1c634ec609a8fcd9a",
+    "revision": "968001f94c6d438006ca",
     "url": "/Orcha-Badge-Maker/static/css/main.7c69d888.chunk.css"
   },
   {
@@ -32,7 +32,7 @@ self.__precacheManifest = [
     "url": "/Orcha-Badge-Maker/static/css/1.1af9e717.chunk.css"
   },
   {
-    "revision": "1211bd4ba03d938444953c86d7fd0894",
+    "revision": "b4ecad181c9921855a2c1a9e902e6f51",
     "url": "/Orcha-Badge-Maker/index.html"
   }
 ];

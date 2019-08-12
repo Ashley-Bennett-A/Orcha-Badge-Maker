@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/Orcha-Badge-Maker/precache-manifest.46cd3c8e53dbb988566b496cd048e6d6.js"
+  "/Orcha-Badge-Maker/precache-manifest.e945bdcfb3da79b539b17850c31e2c5b.js"
 );
 
 workbox.clientsClaim();
