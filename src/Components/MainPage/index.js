@@ -8,7 +8,10 @@ import {
   NavbarBrand
 } from "reactstrap";
 
-const photos = [{ src: "/images/badge.jpg" }];
+import badge from "./badge.jpg";
+import badge2 from "./badge2.jpg";
+
+const photos = [{ src: badge }, { src: badge2 }];
 
 const initialState = {
   toptext: "",
@@ -159,9 +162,9 @@ class MainPage extends React.Component {
     const textStyleLeft = {
       fontFamily: "Roboto",
       fontSize: "40px",
-      // textTransform: "uppercase",
+      textTransform: "uppercase",
       fill: "#FFF",
-      fontWeight: 600,
+      // fontWeight: 600,
 
       // stroke: "#000",
       userSelect: "none"
@@ -171,7 +174,7 @@ class MainPage extends React.Component {
       fontSize: "70px",
       // textTransform: "uppercase",
       fill: "#FFF",
-      fontWeight: 600,
+      // fontWeight: 600,
 
       // stroke: "#000",
       userSelect: "none"
@@ -180,7 +183,7 @@ class MainPage extends React.Component {
     const textStyleBottom = {
       fontFamily: "Roboto",
       fontSize: "50px",
-      fontWeight: 700,
+      // fontWeight: 700,
       // textTransform: "uppercase",
       fill: "#23608c",
       // stroke: "#000",
